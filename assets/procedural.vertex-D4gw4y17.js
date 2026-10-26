@@ -1,0 +1,1 @@
+export{Hr as proceduralVertexShader}from"./MiniWorld-B4fY38bB.js";

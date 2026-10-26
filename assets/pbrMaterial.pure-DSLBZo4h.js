@@ -1,0 +1,1 @@
+export{Yi as PBRMaterial,Xi as RegisterPBRMaterial,Zi as RegisterPbrMaterial}from"./MiniWorld-B4fY38bB.js";

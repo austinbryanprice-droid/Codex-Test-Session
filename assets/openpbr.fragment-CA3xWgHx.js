@@ -1,0 +1,1 @@
+export{ei as openpbrPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

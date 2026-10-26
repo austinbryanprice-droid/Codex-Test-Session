@@ -1,0 +1,1 @@
+export{p as iblVoxelGridVertexShader}from"./MiniWorld-B4fY38bB.js";

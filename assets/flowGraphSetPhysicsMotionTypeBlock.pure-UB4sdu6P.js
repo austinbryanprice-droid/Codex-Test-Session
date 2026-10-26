@@ -1,0 +1,1 @@
+export{wc as FlowGraphSetPhysicsMotionTypeBlock,Tc as RegisterFlowGraphSetPhysicsMotionTypeBlock}from"./MiniWorld-B4fY38bB.js";

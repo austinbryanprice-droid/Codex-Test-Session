@@ -1,0 +1,1 @@
+export{_r as defaultVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

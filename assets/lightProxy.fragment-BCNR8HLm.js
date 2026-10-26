@@ -1,0 +1,1 @@
+export{vi as lightProxyPixelShader}from"./MiniWorld-B4fY38bB.js";

@@ -1,0 +1,1 @@
+export{tt as rsmFullGlobalIlluminationPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

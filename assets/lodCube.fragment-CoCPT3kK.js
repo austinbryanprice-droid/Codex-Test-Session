@@ -1,0 +1,1 @@
+export{tr as lodCubePixelShader}from"./MiniWorld-B4fY38bB.js";

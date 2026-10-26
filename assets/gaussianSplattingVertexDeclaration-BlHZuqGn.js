@@ -1,0 +1,1 @@
+export{jr as gaussianSplattingVertexDeclaration}from"./MiniWorld-B4fY38bB.js";

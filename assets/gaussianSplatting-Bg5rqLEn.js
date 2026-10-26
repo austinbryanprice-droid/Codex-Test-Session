@@ -1,0 +1,1 @@
+export{Mr as gaussianSplattingWGSL}from"./MiniWorld-B4fY38bB.js";

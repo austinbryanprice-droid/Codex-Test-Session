@@ -1,0 +1,1 @@
+export{Ti as shadowMapFragmentSoftTransparentShadowWGSL}from"./MiniWorld-B4fY38bB.js";

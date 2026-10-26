@@ -1,0 +1,1 @@
+export{Qn as lodPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

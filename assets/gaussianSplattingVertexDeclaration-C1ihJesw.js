@@ -1,0 +1,1 @@
+export{Nr as gaussianSplattingVertexDeclarationWGSL}from"./MiniWorld-B4fY38bB.js";

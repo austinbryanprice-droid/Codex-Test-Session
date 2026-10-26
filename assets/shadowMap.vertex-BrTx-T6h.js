@@ -1,0 +1,1 @@
+export{xi as shadowMapVertexShader}from"./MiniWorld-B4fY38bB.js";

@@ -1,0 +1,1 @@
+export{ai as pbrVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

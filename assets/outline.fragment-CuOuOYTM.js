@@ -1,0 +1,1 @@
+export{B as outlinePixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";
