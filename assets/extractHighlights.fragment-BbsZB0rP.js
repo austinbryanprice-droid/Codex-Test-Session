@@ -1,0 +1,1 @@
+export{Yt as extractHighlightsPixelShader}from"./MiniWorld-B4fY38bB.js";

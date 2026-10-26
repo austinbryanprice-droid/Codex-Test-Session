@@ -1,0 +1,1 @@
+export{pn as passPixelShader}from"./MiniWorld-B4fY38bB.js";

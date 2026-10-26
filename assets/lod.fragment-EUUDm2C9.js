@@ -1,0 +1,1 @@
+export{er as lodPixelShader}from"./MiniWorld-B4fY38bB.js";

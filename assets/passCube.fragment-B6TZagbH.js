@@ -1,0 +1,1 @@
+export{fn as passCubePixelShader}from"./MiniWorld-B4fY38bB.js";

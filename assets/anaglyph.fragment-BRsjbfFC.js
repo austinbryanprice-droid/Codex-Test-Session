@@ -1,0 +1,1 @@
+export{Vt as anaglyphPixelShader}from"./MiniWorld-B4fY38bB.js";

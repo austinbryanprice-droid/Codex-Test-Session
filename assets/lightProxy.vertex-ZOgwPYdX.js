@@ -1,0 +1,1 @@
+export{hi as lightProxyVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

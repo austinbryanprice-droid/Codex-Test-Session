@@ -1,0 +1,1 @@
+export{D as iblGenerateVoxelMipPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

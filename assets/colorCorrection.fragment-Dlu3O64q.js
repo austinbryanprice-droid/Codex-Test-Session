@@ -1,0 +1,1 @@
+export{It as colorCorrectionPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

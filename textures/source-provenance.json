@@ -1,0 +1,195 @@
+{
+  "materials": {
+    "meadow": {
+      "source": "https://polyhaven.com/a/leafy_grass",
+      "license": "CC0-1.0",
+      "authors": {
+        "Charlotte Baglioni": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/polyhaven/converted/meadow-color.jpg",
+        "normal.png": "art-source/polyhaven/converted/meadow-normal.png",
+        "orm.jpg": "art-source/polyhaven/converted/meadow-orm.jpg"
+      }
+    },
+    "soil": {
+      "source": "https://polyhaven.com/a/brown_mud_dry",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/polyhaven/converted/soil-color.jpg",
+        "normal.png": "art-source/polyhaven/converted/soil-normal.png",
+        "orm.jpg": "art-source/polyhaven/converted/soil-orm.jpg"
+      }
+    },
+    "asphalt": {
+      "source": "https://polyhaven.com/a/asphalt_03",
+      "license": "CC0-1.0",
+      "authors": {
+        "Dario Barresi": "processing",
+        "Charlotte Baglioni": "photography"
+      },
+      "files": {
+        "color.jpg": "art-source/polyhaven/converted/asphalt-color.jpg",
+        "normal.png": "art-source/polyhaven/converted/asphalt-normal.png",
+        "orm.jpg": "art-source/polyhaven/converted/asphalt-orm.jpg"
+      }
+    },
+    "concrete": {
+      "source": "https://polyhaven.com/a/concrete",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/polyhaven/converted/concrete-color.jpg",
+        "normal.png": "art-source/polyhaven/converted/concrete-normal.png",
+        "orm.jpg": "art-source/polyhaven/converted/concrete-orm.jpg"
+      }
+    },
+    "gravel": {
+      "source": "https://polyhaven.com/a/gravel",
+      "license": "CC0-1.0",
+      "authors": {
+        "Dimitrios Savva": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/polyhaven/converted/gravel-color.jpg",
+        "normal.png": "art-source/polyhaven/converted/gravel-normal.png",
+        "orm.jpg": "art-source/polyhaven/converted/gravel-orm.jpg"
+      }
+    },
+    "tree-small-02-0": {
+      "source": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/tree-small-02-0-color.jpg",
+        "normal.png": "art-source/scenery/converted/tree-small-02-0-normal.png",
+        "orm.jpg": "art-source/scenery/converted/tree-small-02-0-orm.jpg"
+      }
+    },
+    "tree-small-02-1": {
+      "source": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/tree-small-02-1-color.png",
+        "normal.png": "art-source/scenery/converted/tree-small-02-1-normal.png",
+        "orm.jpg": "art-source/scenery/converted/tree-small-02-1-orm.jpg"
+      }
+    },
+    "tree-small-02-2": {
+      "source": "https://polyhaven.com/a/tree_small_02",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/tree-small-02-2-color.jpg",
+        "normal.png": "art-source/scenery/converted/tree-small-02-2-normal.png",
+        "orm.jpg": "art-source/scenery/converted/tree-small-02-2-orm.jpg"
+      }
+    },
+    "shrub-02-0": {
+      "source": "https://polyhaven.com/a/shrub_02",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rico Cilliers": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/shrub-02-0-color.jpg",
+        "normal.png": "art-source/scenery/converted/shrub-02-0-normal.png",
+        "orm.jpg": "art-source/scenery/converted/shrub-02-0-orm.jpg"
+      }
+    },
+    "grass-medium-01-0": {
+      "source": "https://polyhaven.com/a/grass_medium_01",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "Photography",
+        "Rico Cilliers": "Modeling"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/grass-medium-01-0-color.jpg",
+        "normal.png": "art-source/scenery/converted/grass-medium-01-0-normal.png",
+        "orm.jpg": "art-source/scenery/converted/grass-medium-01-0-orm.jpg"
+      }
+    },
+    "wall": {
+      "source": "https://polyhaven.com/a/grey_plaster",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/wall-color.jpg",
+        "normal.png": "art-source/scenery/converted/wall-normal.png",
+        "orm.jpg": "art-source/scenery/converted/wall-orm.jpg"
+      }
+    },
+    "roof": {
+      "source": "https://polyhaven.com/a/metal_plate",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/roof-color.jpg",
+        "normal.png": "art-source/scenery/converted/roof-normal.png",
+        "orm.jpg": "art-source/scenery/converted/roof-orm.jpg"
+      }
+    },
+    "fir-tree-01-0": {
+      "source": "https://polyhaven.com/a/fir_tree_01",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/fir-tree-01-0-color.jpg",
+        "normal.png": "art-source/scenery/converted/fir-tree-01-0-normal.png",
+        "orm.jpg": "art-source/scenery/converted/fir-tree-01-0-orm.jpg"
+      }
+    },
+    "fir-tree-01-1": {
+      "source": "https://polyhaven.com/a/fir_tree_01",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/fir-tree-01-1-color.jpg",
+        "normal.png": "art-source/scenery/converted/fir-tree-01-1-normal.png",
+        "orm.jpg": "art-source/scenery/converted/fir-tree-01-1-orm.jpg"
+      }
+    },
+    "fir-tree-01-2": {
+      "source": "https://polyhaven.com/a/fir_tree_01",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "photography",
+        "Rico Cilliers": "modeling"
+      },
+      "files": {
+        "color.jpg": "art-source/scenery/converted/fir-tree-01-2-color.jpg",
+        "normal.png": "art-source/scenery/converted/fir-tree-01-2-normal.png",
+        "orm.jpg": "art-source/scenery/converted/fir-tree-01-2-orm.jpg"
+      }
+    }
+  },
+  "environment": {
+    "source": "https://polyhaven.com/a/farmland_overcast",
+    "license": "CC0-1.0",
+    "file": "art-source/polyhaven/farmland_overcast/hdri.hdr",
+    "photographic": true
+  }
+}

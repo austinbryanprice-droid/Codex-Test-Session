@@ -1,0 +1,1 @@
+export{ti as openpbrVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

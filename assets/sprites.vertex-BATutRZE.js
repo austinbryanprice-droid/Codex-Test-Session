@@ -1,0 +1,1 @@
+export{s as spritesVertexShader}from"./MiniWorld-B4fY38bB.js";

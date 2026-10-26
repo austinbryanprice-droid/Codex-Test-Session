@@ -1,0 +1,1 @@
+export{si as colorVertexShader}from"./MiniWorld-B4fY38bB.js";

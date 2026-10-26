@@ -1,0 +1,1 @@
+export{z as outlineVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

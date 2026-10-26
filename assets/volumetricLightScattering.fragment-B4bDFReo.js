@@ -1,0 +1,1 @@
+export{xn as volumetricLightScatteringPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

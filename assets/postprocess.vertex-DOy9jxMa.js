@@ -1,0 +1,1 @@
+export{Er as postprocessVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

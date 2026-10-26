@@ -1,0 +1,1 @@
+export{Ur as proceduralVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

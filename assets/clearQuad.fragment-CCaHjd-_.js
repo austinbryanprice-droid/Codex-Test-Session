@@ -1,0 +1,1 @@
+export{xl as clearQuadPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

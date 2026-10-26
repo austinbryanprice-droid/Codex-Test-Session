@@ -1,0 +1,1 @@
+export{Y as boundingBoxRendererVertexShader}from"./MiniWorld-B4fY38bB.js";

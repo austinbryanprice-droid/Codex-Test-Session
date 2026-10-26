@@ -1,0 +1,1 @@
+export{Vn as particlesPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

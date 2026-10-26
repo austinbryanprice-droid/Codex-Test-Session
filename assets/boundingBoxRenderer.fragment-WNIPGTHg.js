@@ -1,0 +1,1 @@
+export{J as boundingBoxRendererPixelShaderWGSL}from"./MiniWorld-B4fY38bB.js";

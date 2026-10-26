@@ -1,0 +1,1 @@
+export{ci as colorPixelShader}from"./MiniWorld-B4fY38bB.js";

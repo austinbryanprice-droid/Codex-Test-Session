@@ -1,0 +1,1 @@
+export{Fr as hdrIrradianceFilteringVertexShaderWGSL}from"./MiniWorld-B4fY38bB.js";

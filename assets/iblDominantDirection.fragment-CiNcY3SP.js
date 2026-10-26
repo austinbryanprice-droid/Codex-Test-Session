@@ -1,0 +1,1 @@
+export{h as iblDominantDirectionPixelShader}from"./MiniWorld-B4fY38bB.js";
