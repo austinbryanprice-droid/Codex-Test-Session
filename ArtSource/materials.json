@@ -1,0 +1,72 @@
+{
+  "tree-small-02-2": {
+    "color": "tree-small-02-2-color.jpg",
+    "normal": "tree-small-02-2-normal.png",
+    "orm": "tree-small-02-2-orm.jpg"
+  },
+  "tree-small-02-0": {
+    "color": "tree-small-02-0-color.jpg",
+    "normal": "tree-small-02-0-normal.png",
+    "orm": "tree-small-02-0-orm.jpg"
+  },
+  "tree-small-02-1": {
+    "color": "tree-small-02-1-color.png",
+    "normal": "tree-small-02-1-normal.png",
+    "orm": "tree-small-02-1-orm.jpg"
+  },
+  "fir-tree-01-0": {
+    "color": "fir-tree-01-0-color.jpg",
+    "normal": "fir-tree-01-0-normal.png",
+    "orm": "fir-tree-01-0-orm.jpg"
+  },
+  "fir-tree-01-1": {
+    "color": "fir-tree-01-1-color.jpg",
+    "normal": "fir-tree-01-1-normal.png",
+    "orm": "fir-tree-01-1-orm.jpg"
+  },
+  "fir-tree-01-2": {
+    "color": "fir-tree-01-2-color.jpg",
+    "normal": "fir-tree-01-2-normal.png",
+    "orm": "fir-tree-01-2-orm.jpg"
+  },
+  "shrub-02-0": {
+    "color": "shrub-02-0-color.jpg",
+    "normal": "shrub-02-0-normal.png",
+    "orm": "shrub-02-0-orm.jpg"
+  },
+  "grass-medium-01-0": {
+    "color": "grass-medium-01-0-color.jpg",
+    "normal": "grass-medium-01-0-normal.png",
+    "orm": "grass-medium-01-0-orm.jpg"
+  },
+  "meadow": {
+    "color": "meadow-color.jpg",
+    "normal": "meadow-normal.png",
+    "orm": "meadow-orm.jpg"
+  },
+  "soil": {
+    "color": "soil-color.jpg",
+    "normal": "soil-normal.png",
+    "orm": "soil-orm.jpg"
+  },
+  "gravel": {
+    "color": "gravel-color.jpg",
+    "normal": "gravel-normal.png",
+    "orm": "gravel-orm.jpg"
+  },
+  "wall": {
+    "color": "wall-color.jpg",
+    "normal": "wall-normal.png",
+    "orm": "wall-orm.jpg"
+  },
+  "roof": {
+    "color": "roof-color.jpg",
+    "normal": "roof-normal.png",
+    "orm": "roof-orm.jpg"
+  },
+  "concrete": {
+    "color": "concrete-color.jpg",
+    "normal": "concrete-normal.png",
+    "orm": "concrete-orm.jpg"
+  }
+}
