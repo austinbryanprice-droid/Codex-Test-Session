@@ -23,3 +23,8 @@ First workstation gate:
 6. Package a Development client and repeat outside the editor.
 
 Do not claim this gate passed from script syntax checks or Blender export alone.
+
+Workstation build feedback: UE 5.8 rejected V5 backward-compatible target defaults
+before compilation because the editor shares build products with UnrealEditor.
+All three targets now use V7 defaults and the explicit Unreal5_8 include order.
+The configuration correction is published; the next Windows build is pending.
