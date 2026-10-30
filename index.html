@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cpath fill=%27%23d4b67c%27 d=%27M23 2A14 14 0 1 0 30 25 14 14 0 0 1 23 2%27/%3E%3C/svg%3E"
+    />
+    <title>MOONFANG · Creature Atelier</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas
+        tabindex="0"
+        id="world"
+        aria-label="Interactive Moonfang werewolf character test arena"
+      ></canvas>
+      <header>
+        <a class="brand" href="./"
+          ><span class="sigil">ϟ</span
+          ><span>MOONFANG<small>CREATURE ATELIER / 001</small></span></a
+        >
+        <div class="build">
+          <i></i> LIVE CHARACTER STUDY <span id="backend">INITIALIZING</span>
+        </div>
+      </header>
+      <section class="intro">
+        <div class="eyebrow">THE ECLIPSE BESTIARY</div>
+        <h1>Born of<br /><em>the wild.</em></h1>
+        <p>
+          An ancient guardian. An untamed silhouette.<br />One creature, brought
+          into the light.
+        </p>
+        <div class="tags">
+          <span>PROCEDURAL CHARACTER</span><span>ORIGINAL DESIGN</span>
+        </div>
+      </section>
+      <aside>
+        <div class="eyebrow">ANIMATION STUDIES</div>
+        <div id="clips"></div>
+        <div class="divider"></div>
+        <div class="eyebrow">LIGHTING RIG</div>
+        <div class="segmented">
+          <button data-light="sun" class="active">Sunlit</button
+          ><button data-light="moon">Moonlit</button
+          ><button data-light="studio">Studio</button>
+        </div>
+        <label class="control"
+          >Detail preset
+          <select id="quality">
+            <option value="balanced">Balanced</option>
+            <option value="ultra">Ultra</option>
+            <option value="low">Low</option>
+          </select></label
+        ><button class="outline" id="camera">↗ Inspect the face</button
+        ><button class="outline" id="export">↓ Export character .glb</button>
+      </aside>
+      <footer>
+        <div class="specimen">
+          <span class="index">01</span>
+          <div>
+            <strong>THE MOONFANG</strong
+            ><small>LUPINE GUARDIAN · SHARED HUMANOID RIG</small>
+          </div>
+        </div>
+        <div class="hint">
+          <kbd>DRAG</kbd> orbit <kbd>SCROLL</kbd> zoom <kbd>WASD</kbd> move
+          <kbd>SPACE</kbd> attack <kbd>R</kbd> cast
+        </div>
+        <button id="hud">Hide interface <kbd>H</kbd></button>
+      </footer>
+      <div id="perf">
+        <div>
+          <b id="fps">—</b><span>FPS</span
+          ><span id="budget">FRAME BUDGET 16.7 MS</span>
+        </div>
+        <div class="meter"><i id="meter"></i></div>
+        <p id="timing">CPU — · GPU —</p>
+        <p id="draws">SCENE — · SHADOW — · SCREEN —</p>
+        <p id="mesh">Loading geometry…</p>
+        <small id="gpu"></small>
+      </div>
+      <div id="loading">
+        <div class="load-sigil">☾</div>
+        <span class="eyebrow">AWAKENING THE GUARDIAN</span>
+        <h2>Forged in moonlight.</h2>
+        <p id="load-note">Loading skinned geometry and animation studies…</p>
+        <progress id="progress" max="100" value="10"></progress
+        ><small>Materials and shaders warm up before exploration.</small>
+      </div>
+      <div id="error" role="alert" hidden></div>
+      <button id="show" hidden>Show interface · H</button>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
