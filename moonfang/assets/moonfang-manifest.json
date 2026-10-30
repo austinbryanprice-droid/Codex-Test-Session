@@ -1,0 +1,20 @@
+{
+  "name": "Moonfang",
+  "version": 1,
+  "license": "CC0-1.0",
+  "url": "moonfang.glb",
+  "metresTall": 3.8,
+  "bytes": 4379928,
+  "sha256": "7496f386c2d6eb5411d8d4dab9ed8c8d31269955b2a23f6e71154e67946073ca",
+  "joints": 26,
+  "clips": [
+    "Idle",
+    "Run",
+    "Cast",
+    "Attack",
+    "Hit",
+    "Death"
+  ],
+  "triangles": 122594,
+  "runtimeDrawGroups": 2
+}
