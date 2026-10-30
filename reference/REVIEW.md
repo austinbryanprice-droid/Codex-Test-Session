@@ -38,3 +38,7 @@ The topology was reduced from roughly 170K to 123K triangles after the new detai
 Two runtime character draw groups remain. Physical-GPU frame times have not been
 measured; no claim of maintaining 60 FPS is made from software-browser captures.
 The final generated GLB passes rig, clip, skin-attribute, AO and size checks.
+
+Production base-path validation also passes: the actual static bundle loads at
+`/Codex-Test-Session/moonfang/`, the software WebGPU device-loss flow recovers to
+a nonblank WebGL2 render, and no HTTP/JavaScript errors remain after recovery.

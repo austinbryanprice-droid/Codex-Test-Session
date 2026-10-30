@@ -1,0 +1,8 @@
+{
+  "productionSubpath": "/Codex-Test-Session/moonfang/",
+  "requiredAssets": "loaded without HTTP errors",
+  "deviceLossRecovery": "WebGPU software device reset recovered to WebGL2",
+  "javascriptErrors": [],
+  "renderedCanvas": "verified nonblank",
+  "gpu60FPS": "not measured on physical hardware"
+}
