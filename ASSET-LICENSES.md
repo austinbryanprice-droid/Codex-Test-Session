@@ -23,3 +23,7 @@ bundled. The attached user image guides silhouette/color; the design and geometr
 are original. This is a stylized approximation, not an exact reproduction.
 
 CC0 legal terms: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+The directional fur-detail, tangent-normal and cutout PNGs are original code-generated
+CC0 art (`scripts/generate-fur.py`), not scanned or copied from the reference.
+The asset-pack ZIP uses the MIT-licensed fflate utility bundled with Three.js.

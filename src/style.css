@@ -443,3 +443,16 @@ button:hover {
     bottom: 18px;
   }
 }
+
+.asset-links {
+  display: grid;
+  gap: 9px;
+  margin-top: 13px;
+  text-align: center;
+}
+.asset-links a {
+  font-size: 8px;
+  color: #d4c095;
+  cursor: pointer;
+  text-underline-offset: 3px;
+}

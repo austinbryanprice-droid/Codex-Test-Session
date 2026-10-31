@@ -14,9 +14,15 @@ test("renders a skinned character, six distinct clips, controls and export", asy
       surfaces: l.hero.material.length,
       clips: [...l.actions.keys()],
       triangles: l.hero.geometry.index.count / 3,
+      vertexBuffers: new Set(
+        Object.values(l.hero.geometry.attributes).map((a: any) =>
+          a.isInterleavedBufferAttribute ? a.data : a,
+        ),
+      ).size,
     };
   });
   expect(stats.groups).toBe(2);
+  expect(stats.vertexBuffers).toBeLessThanOrEqual(8);
   expect(stats.surfaces).toBe(2);
   expect(stats.triangles).toBeLessThan(150000);
   expect(stats.clips).toHaveLength(6);
@@ -66,7 +72,7 @@ test("renders a skinned character, six distinct clips, controls and export", asy
   await expect(page.getByRole("alert")).toBeHidden();
 });
 test("missing required character shows an explicit error", async ({ page }) => {
-  await page.route("**/moonfang.glb", (route) =>
+  await page.route("**/moonfang.glb*", (route) =>
     route.fulfill({ status: 404, body: "missing" }),
   );
   await page.goto("/?webgl=1");

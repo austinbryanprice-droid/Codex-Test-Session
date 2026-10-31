@@ -36,3 +36,52 @@ test("every surface carries skinning and baked occlusion within the download bud
     }
   assert.ok(triangles < 150000, `${triangles} triangles`);
 });
+
+test("wolf skull outer faces point outward, preventing inside-out renders", async () => {
+  const text = await readFile(
+    new URL("../art-source/head.obj", import.meta.url),
+    "utf8",
+  );
+  const vertices = [],
+    faces = [];
+  for (const line of text.split("\n")) {
+    if (line.startsWith("v "))
+      vertices.push(line.split(/\s+/).slice(1).map(Number));
+    if (line.startsWith("f "))
+      faces.push(
+        line
+          .split(/\s+/)
+          .slice(1)
+          .map((n) => Number(n) - 1),
+      );
+  }
+  let checked = 0,
+    outward = 0;
+  for (const face of faces) {
+    const [a, b, c] = face.map((i) => vertices[i]);
+    const y = (a[1] + b[1] + c[1]) / 3,
+      z = (a[2] + b[2] + c[2]) / 3;
+    if (y <= 0.22 || z < 3.1 || z > 3.4) continue;
+    const normalY =
+      (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]);
+    checked++;
+    if (normalY > 0) outward++;
+  }
+  assert.ok(checked > 100);
+  assert.ok(
+    outward / checked > 0.95,
+    `${outward}/${checked} outward rear faces`,
+  );
+});
+test("exported fur retains its blue PBR factors rather than white exporter defaults", () => {
+  const surfaces = doc.materials.filter((m) =>
+    /hide|fur|mane|roots/.test(m.name),
+  );
+  assert.ok(surfaces.length >= 3);
+  for (const m of surfaces) {
+    const c = m.pbrMetallicRoughness.baseColorFactor;
+    assert.ok(c, `${m.name} missing color`);
+    assert.ok(c[2] > c[0] * 1.4, m.name);
+    assert.ok(c[2] < 0.4, m.name);
+  }
+});

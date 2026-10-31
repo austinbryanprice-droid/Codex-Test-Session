@@ -1,15 +1,28 @@
 import * as T from "three/webgpu";
-import { attribute, pass, mrt, output, emissive } from "three/tsl";
+import {
+  attribute,
+  pass,
+  texture,
+  uv,
+  mix,
+  float,
+  normalMap,
+  vec2,
+} from "three/tsl";
 import { bloom } from "three/addons/tsl/display/BloomNode.js";
 import { fxaa } from "three/addons/tsl/display/FXAANode.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
+import {
+  mergeGeometries,
+  interleaveAttributes,
+} from "three/addons/utils/BufferGeometryUtils.js";
 import { CSMShadowNode } from "three/addons/csm/CSMShadowNode.js";
 import { secondary } from "./secondary";
 import { environment } from "./environment";
 import "./style.css";
+import { assetRevision } from "./asset-version";
 const $ = <E extends HTMLElement = HTMLElement>(id: string) =>
   document.getElementById(id) as E;
 const error = (e: unknown) => {
@@ -29,7 +42,14 @@ async function start() {
     forceWebGL: query.has("webgl") || !("gpu" in navigator),
     trackTimestamp: true,
   });
-  renderer.onDeviceLost = (info) => {
+  const recoverGraphics = (message: string) => {
+    if (deviceLost) return;
+    try {
+      sessionStorage.setItem(
+        "moonfang-last-graphics-error",
+        message.slice(0, 2000),
+      );
+    } catch {}
     deviceLost = true;
     renderer.setAnimationLoop(null);
     if (!query.has("webgl")) {
@@ -37,9 +57,23 @@ async function start() {
       retry.searchParams.set("webgl", "1");
       retry.searchParams.set("recovered", "1");
       location.replace(retry);
-    } else error(info.message);
+    } else error(message);
   };
+  renderer.onDeviceLost = (info) => recoverGraphics(info.message);
   await renderer.init();
+  const device = (
+    renderer.backend as unknown as {
+      device?: {
+        addEventListener(
+          type: string,
+          listener: (event: { error?: { message?: string } }) => void,
+        ): void;
+      };
+    }
+  ).device;
+  device?.addEventListener("uncapturederror", (event) =>
+    recoverGraphics(event.error?.message || "WebGPU validation error"),
+  );
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.setSize(innerWidth, innerHeight);
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -83,7 +117,7 @@ async function start() {
     0.05,
     100,
   );
-  camera.position.set(5.7, 3.5, 8.4);
+  camera.position.set(-5.7, 3.5, 8.4);
   const controls = new OrbitControls(camera, canvas);
   controls.target.set(0, 1.9, 0);
   controls.enableDamping = true;
@@ -109,10 +143,20 @@ async function start() {
     mode: "practical",
   });
   sun.shadow.shadowNode = csm;
-  const rim = new T.DirectionalLight(0x9cc9eb, 1.5);
-  rim.position.set(4, 4, -5);
+  const rim = new T.DirectionalLight(0x8cb6e5, 2.4);
+  rim.position.set(-4, 4, -3);
   scene.add(rim);
   const arena = environment(scene);
+  if (query.has("compare")) {
+    scene.traverse((o) => {
+      if ((o as T.Mesh).isMesh) o.visible = false;
+    });
+    scene.background = new T.Color(0x101820);
+    camera.position.set(-4.8, 2.7, 3.3);
+    controls.target.set(0, 1.9, 0);
+    scene.environmentIntensity = 0.3;
+    document.getElementById("app")!.classList.add("hide");
+  }
   // Instrument actual submitted objects. Nested shadow renders identify their camera.
   const counts = { scene: 0, shadow: 0, screen: 0 };
   scene.traverse((obj) => {
@@ -126,7 +170,8 @@ async function start() {
     }
   });
   $("progress").setAttribute("value", "35");
-  const url = import.meta.env.BASE_URL + "assets/moonfang.glb";
+  const url =
+    import.meta.env.BASE_URL + "assets/moonfang.glb?v=" + assetRevision;
   const gltf = await new GLTFLoader().loadAsync(url, (p) => {
     if (p.total)
       $("progress").setAttribute(
@@ -143,6 +188,19 @@ async function start() {
     if ((o as T.SkinnedMesh).isSkinnedMesh) sources.push(o as T.SkinnedMesh);
   });
   if (!sources.length) throw Error("The required skinned character is missing");
+  const furCutout = await new T.TextureLoader().loadAsync(
+    import.meta.env.BASE_URL + "assets/fur-cutout.png?v=" + assetRevision,
+  );
+  const furDetail = await new T.TextureLoader().loadAsync(
+    import.meta.env.BASE_URL + "assets/fur-detail.png?v=" + assetRevision,
+  );
+  const furNormal = await new T.TextureLoader().loadAsync(
+    import.meta.env.BASE_URL + "assets/fur-normal.png?v=" + assetRevision,
+  );
+  for (const map of [furDetail, furNormal]) {
+    map.wrapS = map.wrapT = T.RepeatWrapping;
+    map.anisotropy = 4;
+  }
   const first = sources[0],
     groups: T.BufferGeometry[][] = [[], []];
   for (const mesh of sources) {
@@ -151,23 +209,34 @@ async function start() {
     const n = geometry.attributes.position.count;
     const colors = new Float32Array(n * 3),
       rough = new Float32Array(n),
-      metal = new Float32Array(n);
+      metal = new Float32Array(n),
+      furWeight = new Float32Array(n),
+      partAO = new Float32Array(n),
+      furCard = new Float32Array(n);
     for (let i = 0; i < n; i++) {
       mat.color.toArray(colors, i * 3);
-      const tint = /hide|fur|mane|roots/.test(mat.name) ? 0.4 : 1;
+      furWeight[i] = /hide|fur|mane|roots/.test(mat.name) ? 1 : 0;
+      const tint = 1;
       colors[i * 3] *= tint;
       colors[i * 3 + 1] *= tint;
       colors[i * 3 + 2] *= tint;
       const ao = geometry.getAttribute("_ao")?.getX(i) ?? 1;
-      colors[i * 3] *= ao;
-      colors[i * 3 + 1] *= ao;
-      colors[i * 3 + 2] *= ao;
+      partAO[i] = ao;
+      furCard[i] = geometry.getAttribute("_furcard")?.getX(i) ?? 0;
       rough[i] = mat.roughness;
       metal[i] = mat.metalness;
     }
     geometry.setAttribute("color", new T.BufferAttribute(colors, 3));
     geometry.setAttribute("surfaceRoughness", new T.BufferAttribute(rough, 1));
     geometry.setAttribute("surfaceMetalness", new T.BufferAttribute(metal, 1));
+    geometry.setAttribute("furWeight", new T.BufferAttribute(furWeight, 1));
+    geometry.setAttribute("partAO", new T.BufferAttribute(partAO, 1));
+    geometry.setAttribute("furCard", new T.BufferAttribute(furCard, 1));
+    if (!geometry.getAttribute("uv"))
+      geometry.setAttribute(
+        "uv",
+        new T.BufferAttribute(new Float32Array(n * 2), 2),
+      );
     // Unused UV sets vary between source primitives; remove before batching.
     for (const name of Object.keys(geometry.attributes))
       if (
@@ -179,6 +248,10 @@ async function start() {
           "color",
           "surfaceRoughness",
           "surfaceMetalness",
+          "furWeight",
+          "partAO",
+          "furCard",
+          "uv",
         ].includes(name)
       )
         geometry.deleteAttribute(name);
@@ -190,8 +263,44 @@ async function start() {
     .map((a) => mergeGeometries(a)!);
   const merged = mergeGeometries(mergedGroups, true);
   if (!merged) throw Error("Character batching failed");
+  // WebGPU guarantees only eight vertex-buffer slots. Pack floating-point
+  // channels into one shared stream; integer skin indices use a second stream.
+  const floatNames = Object.keys(merged.attributes).filter(
+    (name) => name !== "skinIndex",
+  );
+  const floating = floatNames.map((name) => {
+    const source = merged.getAttribute(name) as T.BufferAttribute;
+    if (source.array instanceof Float32Array) return source;
+    const values = new Float32Array(source.count * source.itemSize);
+    for (let i = 0; i < source.count; i++)
+      for (let c = 0; c < source.itemSize; c++)
+        values[i * source.itemSize + c] = source.getComponent(i, c);
+    return new T.BufferAttribute(values, source.itemSize);
+  });
+  // Pinned @types returns one attribute here; the pinned Three implementation returns an array.
+  const interleaved = interleaveAttributes(floating) as unknown as
+    T.InterleavedBufferAttribute[] | null;
+  if (!Array.isArray(interleaved))
+    throw Error("Character vertex packing failed");
+  floatNames.forEach((name, i) => merged.setAttribute(name, interleaved[i]));
   const materials = mergedGroups.map(() => {
     const m = new T.MeshStandardNodeMaterial({ vertexColors: true });
+    m.colorNode = mix(
+      float(1),
+      texture(furDetail, uv().mul(2.5)).r,
+      attribute("furWeight", "float").mul(0.6),
+    );
+    m.normalNode = normalMap(
+      texture(furNormal, uv().mul(2.5)),
+      vec2(0.38).mul(attribute("furWeight", "float")),
+    );
+    m.opacityNode = mix(
+      float(1),
+      texture(furCutout, uv()).r,
+      attribute("furCard", "float"),
+    );
+    m.alphaTestNode = float(0.35);
+    m.aoNode = attribute("partAO", "float");
     m.roughnessNode = attribute("surfaceRoughness", "float");
     m.metalnessNode = attribute("surfaceMetalness", "float");
     return m;
@@ -225,7 +334,7 @@ async function start() {
     frame = 0,
     quality = "balanced",
     face = false,
-    hidden = false,
+    hidden = query.has("compare"),
     freeze = query.has("still");
   function animate(name: string) {
     const action = actions.get(name);
@@ -253,6 +362,7 @@ async function start() {
     $("clips").append(button);
   }
   animate("Idle");
+  if (freeze) mixer.update(0.3);
   mixer.addEventListener("finished", () => {
     if (current !== "Death") animate("Idle");
   });
@@ -276,6 +386,11 @@ async function start() {
   glowScene.add(glowFire);
   const glowRing = glow.clone();
   glowScene.add(glowRing);
+  if (query.has("compare")) {
+    glow.visible = false;
+    glowFire.visible = false;
+    glowRing.visible = false;
+  }
   const glowPass = pass(glowScene, camera);
   const color = scenePass.getTextureNode("output");
   const shine = bloom(glowPass.getTextureNode("output"), 0.35, 0.35, 0);
@@ -302,12 +417,18 @@ async function start() {
   $("show").onclick = toggleHud;
   $("camera").onclick = () => {
     face = !face;
-    camera.position.set(face ? 1.4 : 5.7, face ? 3.35 : 3.5, face ? 2.4 : 8.4);
+    camera.position.set(
+      face ? -1.4 : -5.7,
+      face ? 3.35 : 3.5,
+      face ? 2.4 : 8.4,
+    );
     controls.target.set(0, face ? 3.15 : 1.9, 0);
     $("camera").textContent = face
       ? "↙ View full character"
       : "↗ Inspect the face";
   };
+  ($("asset-pack") as HTMLAnchorElement).href =
+    import.meta.env.BASE_URL + "assets/moonfang-pack.zip?v=" + assetRevision;
   $("export").onclick = () => {
     const a = document.createElement("a");
     a.href = url;

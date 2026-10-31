@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/asset.test.mjs",
-    "prebuild": "node scripts/manifest.mjs",
+    "prebuild": "node scripts/manifest.mjs && node scripts/package-asset.mjs",
     "test:browser": "playwright test"
   },
   "dependencies": {

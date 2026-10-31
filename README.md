@@ -1,5 +1,9 @@
 # Moonfang — single-character browser lab
 
+**Reference matching remains in progress.** The latest loop fixes structural
+errors and improves the pose/groom, but does not yet reproduce the supplied image.
+See `reference/REVIEW.md` and the `/review/` before/after board.
+
 An original blue werewolf character in a small mythic courtyard, implemented with
 **Three.js 0.180 WebGPURenderer, TypeScript and Vite**. This is a separate asset
 inspection demo; it does not replace the military RTS or Unreal project.
@@ -28,13 +32,19 @@ hand-sculpted mesh. All generated art is CC0; see ASSET-LICENSES.md.
 The original shared humanoid rig has 26 joints and six original baked clips:
 Idle, Run, Cast, Attack, Hit and Death. No third-party rig or animation has been
 retargeted. Body and plate weights are shared; loincloth parts follow the thighs.
-Two additional strips use fixed-step Verlet motion. There is no held weapon in
+Two additional strips use fixed-step Verlet motion. The default shared pose now
+leans and raises a claw, with the head tilted back for the reference expression. There is no held weapon in
 this clawed character. Finger bones are included; production finger contact and
 all clip intersections still need detailed visual review.
 
-The generated GLB is about 4.2 MiB, with 122,594 triangles. Source PBR materials
+The generated GLB includes embedded fur normal maps and blue PBR factors.
+The complete asset pack also supplies the original directional detail/cutout
+textures and instructions for the `_FURCARD` mask. A generic GLB viewer shows
+solid clumps unless it implements that custom attribute.
+
+The generated GLB is about 3.2 MiB, with 67,033 triangles. Source PBR materials
 remain separate in the export. Runtime batches them into two draw groups, with
-per-vertex color, roughness, metalness and ray-tested baked occlusion. A procedural
+per-vertex color, roughness, metalness, groom masks and ray-tested baked occlusion. A procedural
 studio environment gives metal reflections; eyes have modeled irises and pupils.
 The arena is merged by material; fires use a shared instanced mesh.
 
@@ -80,6 +90,7 @@ reference. This is a stylized indie prototype, not an accepted reference match.
 To regenerate geometry, install Python NumPy/scikit-image and Blender 4.3, then:
 
 ```sh
+python scripts/generate-fur.py
 python scripts/generate-head.py
 blender -b -t 2 -P scripts/build-character.py
 npm test
@@ -87,3 +98,15 @@ npm test
 
 The supplied source inputs and generated GLB permit offline use; no asset server,
 account, paid pack or hosted API is required. Keep the license notices when hosting.
+
+`?compare=1` opens a dark-background, fixed-camera model view; H restores controls.
+Asset URLs use a content revision so previously cached models cannot conceal an
+updated mesh or texture. `prebuild` writes the revision and complete asset pack.
+
+Final native-startup diagnosis: the added fur channels initially exceeded the
+WebGPU minimum of eight vertex-buffer streams. Floating-point channels are now
+interleaved, with a separate integer skin-index stream (two streams total).
+A browser regression checks the guaranteed buffer limit. Native validation errors
+and device loss now both trigger explicit fallback recovery. The subsequent
+software-WebGPU attempt reported "Device was destroyed"; fallback startup and
+rendering succeeded. This does not establish native RTX 4090 correctness.
