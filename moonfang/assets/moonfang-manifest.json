@@ -1,11 +1,11 @@
 {
   "name": "Moonfang",
-  "version": 1,
+  "version": 2,
   "license": "CC0-1.0",
   "url": "moonfang.glb",
   "metresTall": 3.8,
-  "bytes": 4379928,
-  "sha256": "7496f386c2d6eb5411d8d4dab9ed8c8d31269955b2a23f6e71154e67946073ca",
+  "bytes": 3348492,
+  "sha256": "4bb88561f256b2bb3c73578921a8c92cdfe1b101419188342ae4612da9b7a38a",
   "joints": 26,
   "clips": [
     "Idle",
@@ -15,6 +15,11 @@
     "Hit",
     "Death"
   ],
-  "triangles": 122594,
-  "runtimeDrawGroups": 2
+  "triangles": 67033,
+  "runtimeDrawGroups": 2,
+  "groom": {
+    "attribute": "_FURCARD",
+    "cutout": "fur-cutout.png",
+    "alphaCutoff": 0.35
+  }
 }
